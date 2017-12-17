@@ -1,17 +1,29 @@
 import io
 from google.cloud import vision
+import json
 
 vision_client = vision.Client()
 
-file_name = 'Screenshots/shot22.png'
+lblDict = []
 
-with io.open(file_name,'rb') as image_file:
-	content = image_file.read()
-	image = vision_client.image(content=content)
+for i in range(501):
 
-labels = image.detect_labels()
+	file_name = 'Screenshots/shot'+str(i)+'.png'
 
-for label in labels:
-	print(label.description)
+	with io.open(file_name,'rb') as image_file:
+		content = image_file.read()
+		image = vision_client.image(content=content)
 
+	labels = image.detect_labels()
+
+	shotDict = {'shot'+str(i):[]}
+
+	for label in labels:
+		shotDict['shot'+str(i)].append(label.description)
+
+	lblDict.append(shotDict)
+	print(shotDict)
+
+with open('photodescriptions.json', 'w') as fout:
+	json.dump(lblDict, fout)
 
