@@ -31,10 +31,10 @@ def fb_login():
     time.sleep(2)
     assert "Facebook" in driver.title
     elem=driver.find_element_by_id('email')
-    elem.send_keys('k-melville@hotmail.com')
+    elem.send_keys('email')
     time.sleep(1)
     elem=driver.find_element_by_id('pass')
-    elem.send_keys('WharF41OuT;')
+    elem.send_keys('password')
     time.sleep(1)
     elem.send_keys(Keys.RETURN)
 
